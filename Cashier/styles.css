@@ -2,65 +2,86 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #f4f4f4;
+  background-image: url("cashier-background.jpg"); /* Replace with your background image */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
 }
 
-header {
-  background-color: #009688;
+#welcome-screen, #game-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   color: white;
-  padding: 10px;
 }
 
-main {
+.hidden {
+  display: none;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #009688;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #007d71;
+}
+
+#money-container {
   margin-top: 20px;
 }
 
 .money-denomination {
   padding: 10px 20px;
   font-size: 18px;
-  margin: 5px;
   background-color: #4caf50;
   border: none;
   color: white;
   cursor: pointer;
   border-radius: 5px;
+  margin: 5px;
 }
 
 .money-denomination:hover {
   background-color: #45a049;
 }
 
-#question-container {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+#question-modal {
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
-#denominations-container {
-  margin-top: 20px;
-}
-
-#total-amount {
-  font-size: 20px;
+#question-text {
+  font-size: 24px;
   font-weight: bold;
 }
 
-footer {
-  margin-top: 20px;
-  color: #333;
-}
-
-#reset-button {
+#close-button {
+  background-color: #007d71;
+  color: white;
+  border: none;
   padding: 10px 20px;
   font-size: 18px;
-  background-color: #009688;
-  border: none;
-  color: white;
-  cursor: pointer;
   border-radius: 5px;
-}
-
-#reset-button:hover {
-  background-color: #007d71;
+  cursor: pointer;
+  margin-top: 20px;
 }
