@@ -1,52 +1,83 @@
 // JavaScript code for the cash payment simulator
 
-let questionAmount = 0;
-let totalAmount = 0;
+document.addEventListener("DOMContentLoaded", function () {
+  const welcomeScreen = document.getElementById("welcome-screen");
+  const gameScreen = document.getElementById("game-screen");
+  const boyButton = document.getElementById("boy-button");
+  const girlButton = document.getElementById("girl-button");
+  const playButton = document.getElementById("play-button");
+  const questionModal = document.getElementById("question-modal");
+  const questionText = document.getElementById("question-text");
+  const closeButton = document.getElementById("close-button");
+  const moneyContainer = document.getElementById("money-container");
+  const oneCentButton = document.getElementById("one-cent-button");
 
-// Generate a random payment amount between RM0 and RM30
-function generateRandomAmount() {
-  return (Math.random() * 30).toFixed(2);
-}
+  let selectedCharacter = "";
+  let isPlaying = false;
 
-function setQuestion() {
-  questionAmount = parseFloat(generateRandomAmount()).toFixed(2);
-  document.getElementById("question").textContent = `Question: RM ${questionAmount}`;
-}
+  // Character selection
+  boyButton.addEventListener("click", () => {
+    selectedCharacter = "Boy";
+    startGame();
+  });
 
-function updateTotalAmount() {
-  document.getElementById("total-amount").textContent = `Total: RM ${totalAmount.toFixed(2)}`;
-}
+  girlButton.addEventListener("click", () => {
+    selectedCharacter = "Girl";
+    startGame();
+  });
 
-// Initialize the question and total amount
-setQuestion();
-updateTotalAmount();
-
-// Function to handle cash denomination button clicks
-function handleCashDenominationClick(amount) {
-  totalAmount += amount;
-  updateTotalAmount();
-
-  // Check if the total amount matches the question amount
-  if (totalAmount.toFixed(2) === questionAmount) {
-    document.getElementById("feedback").textContent = "Congratulations! You got it right!";
-  } else if (totalAmount.toFixed(2) > questionAmount) {
-    document.getElementById("feedback").textContent = "Oops! You've paid more than the required amount.";
-  } else {
-    document.getElementById("feedback").textContent = "";
+  function startGame() {
+    welcomeScreen.classList.add("hidden");
+    gameScreen.classList.remove("hidden");
+    isPlaying = true;
+    showRandomQuestion();
   }
-}
 
-// Attach click event listeners to cash denomination buttons
-document.getElementById("rm1-button").addEventListener("click", () => handleCashDenominationClick(1.00));
-document.getElementById("rm5-button").addEventListener("click", () => handleCashDenominationClick(5.00));
-document.getElementById("rm10-button").addEventListener("click", () => handleCashDenominationClick(10.00));
-document.getElementById("rm20-button").addEventListener("click", () => handleCashDenominationClick(20.00));
-document.getElementById("cents10-button").addEventListener("click", () => handleCashDenominationClick(0.10));
+  // Question modal
+  closeButton.addEventListener("click", () => {
+    questionModal.classList.add("hidden");
+    if (isPlaying) {
+      showRandomQuestion();
+    }
+  });
 
-// Reset button
-document.getElementById("reset-button").addEventListener("click", () => {
-  totalAmount = 0;
-  updateTotalAmount();
-  setQuestion();
-  document.getElementById("feedback").textContent = "";
+  function showRandomQuestion() {
+    // Generate and display a random question
+    const randomAmount = (Math.random() * 30).toFixed(2);
+    questionText.textContent = `How much is RM ${randomAmount}?`;
+    questionModal.classList.remove("hidden");
+  }
+
+  // Money denominations
+  const moneyDenominations = [
+    { value: 1.00, text: "RM 1", image: "rm1.png" }, // Replace with your image file path
+    { value: 5.00, text: "RM 5", image: "rm5.png" }, // Replace with your image file path
+    { value: 10.00, text: "RM 10", image: "rm10.png" }, // Replace with your image file path
+    { value: 20.00, text: "RM 20", image: "rm20.png" }, // Replace with your image file path
+  ];
+
+  // Populate the money container with buttons and images
+  moneyDenominations.forEach((denomination) => {
+    const button = document.createElement("button");
+    button.className = "money-denomination";
+    button.textContent = denomination.text;
+    button.addEventListener("click", () => handleMoneySelection(denomination.value));
+    moneyContainer.appendChild(button);
+
+    // Create and append an image element
+    const img = document.createElement("img");
+    img.src = denomination.image; // Change to your image file path
+    img.alt = denomination.text;
+    moneyContainer.appendChild(img);
+  });
+
+  // 1 Cent button
+  oneCentButton.addEventListener("click", () => handleMoneySelection(0.01));
+
+  // Handle money selection
+  function handleMoneySelection(amount) {
+    // Handle the logic for adding the selected amount to the game
+    // You can keep track of the total amount, check if it matches the question, etc.
+    // Update the game state accordingly
+  }
 });
