@@ -1,19 +1,7 @@
-// JavaScript code
+// JavaScript code for the game page
 document.addEventListener("DOMContentLoaded", function () {
-    let selectedGender = null;
-    let userInput = 0;
+    let selectedMoney = []; // Array to store selected money values
     let randomAmount = generateRandomAmount();
-
-    // Gender Selection Logic
-    document.getElementById("boyBtn").addEventListener("click", function () {
-        selectedGender = "boy";
-        // Add any logic or styling for the boy selection if needed
-    });
-
-    document.getElementById("girlBtn").addEventListener("click", function () {
-        selectedGender = "girl";
-        // Add any logic or styling for the girl selection if needed
-    });
 
     // Generating Random Amount
     function generateRandomAmount() {
@@ -25,16 +13,29 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("questionText").textContent = `Which combination of money is correct for RM ${amount}?`;
     }
 
-    // Handling User Input
+    // Handling User Money Selection
     document.querySelectorAll(".money-button").forEach(function (button) {
         button.addEventListener("click", function () {
             const value = parseFloat(button.value);
-            userInput += value;
+            if (selectedMoney.includes(value)) {
+                // Deselect if already selected
+                const index = selectedMoney.indexOf(value);
+                if (index > -1) {
+                    selectedMoney.splice(index, 1);
+                }
+                button.classList.remove("selected");
+            } else {
+                selectedMoney.push(value);
+                button.classList.add("selected");
+            }
         });
     });
 
-    document.getElementById("submitBtn").addEventListener("click", function () {
-        if (userInput === parseFloat(randomAmount)) {
+    document.getElementById("nextBtn").addEventListener("click", function () {
+        // Calculate the sum of selected money
+        const sum = selectedMoney.reduce((acc, val) => acc + val, 0);
+
+        if (sum === parseFloat(randomAmount)) {
             document.getElementById("resultText").textContent = "Congrats, the answer is correct!";
             // Show the Next Question and Exit buttons
         } else {
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Next Question and Exit
     document.getElementById("nextBtn").addEventListener("click", function () {
-        userInput = 0;
+        selectedMoney = []; // Reset selected money
         randomAmount = generateRandomAmount();
         printQuestion(randomAmount);
         document.getElementById("resultText").textContent = "";
@@ -69,4 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             photoLink.href = userPhotoLink;
         }
     });
+
+    // Initialize the game
+    printQuestion(randomAmount);
 });
