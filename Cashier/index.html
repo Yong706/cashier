@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Cash Payment Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Combination Game</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="welcome-page">
-    <h1>Welcome to the Cash Payment Game!</h1>
-    <button id="boy-button">Boy</button>
-    <button id="girl-button">Girl</button>
-    <button id="play-button">Play</button>
-  </div>
-
-  <div id="game-page" class="hidden">
-    <div id="question-modal" class="hidden">
-      <div class="question-content">
-        <p id="question-text">How much is RM 12.50?</p>
-        <button id="close-button">Close</button>
-        <button id="undo-button">Undo</button>
-      </div>
+    <div class="gender-selection">
+        <h1>Welcome to the Money Combination Game</h1>
+        <p>Please select your gender:</p>
+        <button id="boyBtn">Boy</button>
+        <button id="girlBtn">Girl</button>
+    </div>
+    
+    <div class="game-container">
+        <div class="question">
+            <p id="questionText"></p>
+        </div>
+        <div class="menu">
+            <button class="money-button" value="0.01">1 cent</button>
+            <button class="money-button" value="0.10">10 cents</button>
+            <button class="money-button" value="0.20">20 cents</button>
+            <button class="money-button" value="0.50">50 cents</button>
+            <button class="money-button" value="1.00">RM 1</button>
+            <button class="money-button" value="5.00">RM 5</button>
+            <button class="money-button" value="10.00">RM 10</button>
+        </div>
+        <div class="input">
+            <input type="text" id="userInput" placeholder="Enter your answer">
+            <button id="submitBtn">Submit</button>
+        </div>
+        <div class="result">
+            <p id="resultText"></p>
+        </div>
+        <div class="options">
+            <button id="nextBtn">Next Question</button>
+            <button id="exitBtn">Exit</button>
+        </div>
     </div>
 
-    <div id="money-container">
-      <!-- Money images will go here -->
+    <div class="photo-upload">
+        <p>Upload your photo: <a id="photoLink" href="#" target="_blank">Click here</a></p>
     </div>
-    <button id="one-cent-button" class="money-denomination">1 Cent</button>
-    <button id="next-button">Next Question</button>
-  </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
